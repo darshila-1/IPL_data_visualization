@@ -1,0 +1,542 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+
+def orange_cap_info():
+    oc = pd.DataFrame({
+        'Year': [2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017,
+                 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025],
+        'Team': ['PBKS', 'CSK', 'MI', 'RCB', 'RCB', 'CSK', 'KKR', 'SRH', 'RCB',
+                 'SRH', 'SRH', 'SRH', 'PBKS', 'CSK', 'RR', 'GT', 'RCB', 'GT'],
+        'Runs': [616, 572, 618, 608, 733, 733, 660, 562, 973, 641, 735, 692,
+                 670, 635, 863, 890, 741, 759]
+    })
+
+    team_colors = {
+        'PBKS': 'firebrick', 'CSK': 'yellow', 'MI': 'blue',
+        'RCB': 'red', 'KKR': 'indigo', 'SRH': 'orange',
+        'RR': 'magenta', 'GT': 'black'
+    }
+
+    colors = [team_colors[t] for t in oc['Team']]
+    oc.plot(kind='bar', x="Year", y="Runs", color=colors)
+    plt.title("Orange Cap Runs Over the Years")
+    plt.xlabel("Year")
+    plt.ylabel("Runs")
+    plt.show()
+
+
+def purple_cap_info():
+    pc = pd.DataFrame({
+        'Year': [2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017,
+                 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025],
+        'Team': ['RR', 'DEC', 'DEC', 'MI', 'DC', 'CSK', 'CSK', 'CSK', 'SRH',
+                 'SRH', 'PBKS', 'CSK', 'DC', 'RCB', 'RR', 'GT', 'PBKS', 'GT'],
+        'wickets': [22, 23, 21, 28, 25, 32, 23, 26, 23, 26, 24, 26,
+                    30, 32, 27, 28, 24, 25]
+    })
+
+    team_colors = {
+        'PBKS': 'red', 'CSK': 'yellow', 'MI': 'blue',
+        'RCB': 'darkred', 'KKR': 'purple', 'SRH': 'orange',
+        'RR': 'deeppink', 'GT': 'navy', 'DC': 'dodgerblue', 'DEC': 'skyblue'
+    }
+
+    colors = [team_colors[t] for t in pc['Team']]
+    pc.plot(kind='bar', x="Year", y="wickets", color=colors)
+    plt.title("Purple Cap Wickets Over the Years")
+    plt.xlabel("Year")
+    plt.ylabel("Wickets")
+    plt.show()
+
+
+def comparison():
+    import pandas as pd
+    import matplotlib.pyplot as plt
+
+    oc = pd.DataFrame({
+        'Year': [2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017,
+                 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025],
+        'Team': ['PBKS', 'CSK', 'MI', 'RCB', 'RCB', 'CSK', 'KKR', 'SRH', 'RCB',
+                 'SRH', 'SRH', 'SRH', 'PBKS', 'CSK', 'RR', 'GT', 'RCB', 'GT']
+    })
+
+    pc = pd.DataFrame({
+        'Year': [2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017,
+                 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025],
+        'Team': ['RR', 'DEC', 'DEC', 'MI', 'DC', 'CSK', 'CSK', 'CSK', 'SRH',
+                 'SRH', 'PBKS', 'CSK', 'DC', 'RCB', 'RR', 'GT', 'PBKS', 'GT']
+    })
+
+    orange_count = oc['Team'].value_counts().to_dict()
+    purple_count = pc['Team'].value_counts().to_dict()
+
+    teams = list(set(list(orange_count.keys()) + list(purple_count.keys())))
+    teams.sort()
+
+    orange = []
+    purple = []
+
+    for team in teams:
+        if team in orange_count:
+            orange.append(orange_count[team])
+        else:
+            orange.append(0)
+
+        if team in purple_count:
+            purple.append(purple_count[team])
+        else:
+            purple.append(0)
+
+    plt.plot(teams, orange, color='orange', marker='o', label='Orange Cap')
+    plt.plot(teams, purple, color='purple', marker='o', label='Purple Cap')
+    plt.xlabel("Team")
+    plt.ylabel("Number of Times Won")
+    plt.title("Orange Cap vs Purple Cap")
+    plt.legend()
+    plt.grid(True)
+    plt.tight_layout()
+    plt.show()
+
+
+def winner():
+    import pandas as pd
+    import matplotlib.pyplot as plt
+
+    win = pd.DataFrame({
+        'year': [2008, 2009, 2010, 2011, 2012,
+                 2013, 2014, 2015, 2016, 2017,
+                 2018, 2019, 2020, 2021, 2022,
+                 2023, 2024, 2025],
+        'winner': ['RR', 'DEC', 'CSK', 'CSK', 'KKR',
+                   'MI', 'KKR', 'MI', 'SRH', 'MI',
+                   'CSK', 'MI', 'MI', 'CSK', 'GT',
+                   'CSK', 'KKR', 'RCB']
+    })
+
+    team_colors = {
+        'PBKS': 'firebrick', 'CSK': 'yellow', 'MI': 'blue',
+        'RCB': 'red', 'KKR': 'indigo', 'SRH': 'orange',
+        'RR': 'magenta', 'GT': 'black', 'DC': 'dodgerblue',
+        'DEC': 'skyblue', 'RPS': 'lightgreen'
+    }
+
+    plt.figure(figsize=(16, 8))
+    for w in win['winner'].unique():
+        winner_data = win[win['winner'] == w]
+        color = team_colors[w]
+        count = len(winner_data)
+        plt.bar(w, count, color=color)
+
+    plt.xlabel('Team')
+    plt.ylabel('Number of how many times team won')
+    plt.show()
+
+    teams = win['winner'].unique()
+    for team in teams:
+        years = []
+        total_wins = []
+        count = 0
+
+        years_list = win['year'].tolist()
+        winner_list = win['winner'].tolist()
+
+        for i in range(len(years_list)):
+            year = years_list[i]
+            if winner_list[i] == team:
+                count += 1
+
+            years.append(year)
+            total_wins.append(count)
+
+        plt.plot(years, total_wins, label=team, color=team_colors.get(team, 'gray'))
+
+    plt.title('Number of Wins Up to Each Year(Cumulative)')
+    plt.xlabel(win['year'])
+    plt.ylabel('Total Wins so Far')
+    plt.legend()
+    plt.show()
+
+
+def runner():
+    import pandas as pd
+    import matplotlib.pyplot as plt
+
+    runner_up = pd.DataFrame({
+        'year': [2008, 2009, 2010, 2011, 2012,
+                 2013, 2014, 2015, 2016, 2017,
+                 2018, 2019, 2020, 2021, 2022,
+                 2023, 2024, 2025],
+        'runnerup': ['CSK', 'RCB', 'MI', 'RCB',
+                     'CSK', 'CSK', 'PBKS', 'CSK',
+                     'RCB', 'RPS', 'SRH', 'CSK',
+                     'DC', 'KKR', 'RR', 'GT',
+                     'SRH', 'PBKS']
+    })
+
+    team_colors = {
+        'PBKS': 'firebrick', 'CSK': 'yellow', 'MI': 'blue',
+        'RCB': 'red', 'KKR': 'indigo', 'SRH': 'orange',
+        'RR': 'magenta', 'GT': 'black', 'DC': 'dodgerblue',
+        'DEC': 'skyblue', 'RPS': 'lightgreen'
+    }
+
+    plt.figure(figsize=(16, 8))
+    for r in runner_up['runnerup'].unique():
+        runnerup_data = runner_up[runner_up['runnerup'] == r]
+        color = team_colors[r]
+        count = len(runnerup_data)
+        plt.bar(r, count, color=color)
+
+    plt.xlabel("Team")
+    plt.ylabel("Number of how many times team came second")
+    plt.title("RUNNER UP")
+    plt.xticks(rotation=45)
+    plt.show()
+
+    teams = runner_up['runnerup'].unique()
+    for team in teams:
+        years = []
+        total_wins = []
+        count = 0
+
+        years_list = runner_up['year'].tolist()
+        runner_list = runner_up['runnerup'].tolist()
+
+        for i in range(len(years_list)):
+            year = years_list[i]
+            if runner_list[i] == team:
+                count += 1
+
+            years.append(year)
+            total_wins.append(count)
+
+        plt.plot(years, total_wins, label=team, color=team_colors.get(team, 'gray'))
+
+    plt.title("Number of Runner-ups Up to Each Year (Cumulative)")
+    plt.xticks(runner_up['year'])
+    plt.ylabel("Total Wins so Far")
+    plt.legend()
+    plt.show()
+
+
+def centuries():
+    import pandas as pd
+    import matplotlib.pyplot as plt
+
+    centuries = pd.DataFrame({
+        "Year": list(range(2008, 2026)),
+        "Player": [
+            "Shaun Marsh", "Manish Pandey", "Murali Vijay", "Chris Gayle",
+            "Chris Gayle", "Chris Gayle", "Virender Sehwag", "AB de Villiers",
+            "Virat Kohli", "Hashim Amla", "Shane Watson", "David Warner",
+            "Shikhar Dhawan", "Ruturaj Gaikwad", "Jos Buttler", "Shubman Gill",
+            "Jos Buttler", "Vaibhav Suryavanshi"
+        ],
+        "Team": [
+            "PBKS", "RCB", "CSK", "RCB", "RCB",
+            "RCB", "PBKS", "RCB", "RCB", "PBKS",
+            "CSK", "SRH", "DC", "CSK", "RR",
+            "GT", "RR", "RR"
+        ]
+    })
+
+    team_counts = centuries['Team'].value_counts()
+    years_by_team = centuries.groupby('Team')['Year'].apply(list)
+
+    team_colors = {
+        'PBKS': 'red', 'CSK': 'yellow', 'MI': 'blue',
+        'RCB': 'darkred', 'KKR': 'purple', 'SRH': 'orange',
+        'RR': 'deeppink', 'GT': 'navy', 'DC': 'dodgerblue',
+        'DEC': 'skyblue'
+    }
+
+    colors = [team_colors[team] for team in team_counts.index]
+
+    team_counts.plot(kind='bar', color=colors)
+    plt.title('How many years each team appeared for century')
+    plt.xlabel('Team')
+    plt.ylabel('Count of years')
+    plt.tight_layout()
+    plt.show()
+
+    plt.figure(figsize=(16, 8))
+    for player in centuries['Player'].unique():
+        player_data = centuries[centuries['Player'] == player]
+        team = player_data['Team'].iloc[0]
+        color = team_colors[team]
+        count = len(player_data)
+        plt.bar(player, count, color=color)
+        plt.text(player, count, team)
+
+    plt.xlabel("Player")
+    plt.ylabel("Number of Centuries")
+    plt.title("Centuries by Player (Colored by Team)")
+    plt.xticks(rotation=45)
+    plt.show()
+
+
+def hat():
+    import pandas as pd
+    import matplotlib.pyplot as plt
+
+    hat_trick = pd.DataFrame({
+        "Year": [2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015,
+                 2016, 2017, 2018, 2019, 2020, 2021, 2022,
+                 2023, 2024, 2025],
+
+        "Player": ["Makhaya Ntini", "Yuvraj Singh", "Praveen Kumar",
+                   "Amit Mishra", "Ajit Chandila", "Sunil Narine",
+                   "Pravin Tambe", "no one", "Axar Patel",
+                   "Andrew Tye", "no one", "Shreyas Gopal",
+                   "no one", "Harshal Patel", "Yuzvendra Chahal",
+                   "Rashid Khan", "no one", "Yuzvendra Chahal"],
+
+        "Team": ["CSK", "KXIP", "RCB", "DEC", "RR", "KKR",
+                 "RR", "none", "PBKS", "GL", "none", "RR",
+                 "none", "RCB", "RR", "GT", "none", "PBKS"]
+    })
+
+    team_counts = hat_trick['Team'].value_counts()
+    years_by_team = hat_trick.groupby('Team')['Year'].apply(list)
+
+    team_colors = {
+        'PBKS': 'firebrick', 'CSK': 'yellow', 'MI': 'blue', 'RCB': 'red',
+        'KKR': 'indigo', 'SRH': 'orange', 'RR': 'magenta', 'GT': 'black',
+        'DC': 'dodgerblue', 'DEC': 'skyblue', 'KXIP': 'darkred',
+        'GL': 'gray', 'RPS': 'green', 'none': 'lightgrey'
+    }
+
+    colors = [team_colors[team] for team in team_counts.index]
+
+    team_counts.plot(kind='bar', color=colors)
+    plt.title('How many years each team appeared for hat trick')
+    plt.xlabel('Team')
+    plt.ylabel('Count of years')
+    plt.tight_layout()
+    plt.show()
+
+    plt.figure(figsize=(16, 8))
+    for player in hat_trick['Player'].unique():
+        player_data = hat_trick[hat_trick['Player'] == player]
+        team = player_data['Team'].iloc[0]
+        color = team_colors[team]
+        count = len(player_data)
+        plt.bar(player, count, color=color)
+        plt.text(player, count, team)
+
+    plt.xlabel("Player")
+    plt.ylabel("Number of Hat-Tricks")
+    plt.title("Hat-tricks by Player")
+    plt.xticks(rotation=45)
+    plt.show()
+
+
+def csk():
+    import pandas as pd
+    import matplotlib.pyplot as plt
+
+    oc = pd.DataFrame({
+        'Year': list(range(2008, 2026)),
+        'Team': ['PBKS', 'CSK', 'MI', 'RCB', 'RCB', 'CSK', 'KKR', 'SRH', 'RCB',
+                 'SRH', 'SRH', 'SRH', 'PBKS', 'CSK', 'RR', 'GT', 'RCB', 'GT'],
+        'Runs': [616, 572, 618, 608, 733, 733, 660, 562, 973, 641, 735, 692,
+                 670, 635, 863, 890, 741, 759]
+    })
+    csk_oc = oc[oc['Team'] == 'CSK']
+    plt.hist(csk_oc['Runs'], bins=5, color='yellow', edgecolor='black')
+    plt.title("CSK and runs throught out years(orange cap)")
+    plt.xlabel("Runs")
+    plt.ylabel("Frequency")
+    plt.show()
+
+    pc = pd.DataFrame({
+        'Year': list(range(2008, 2026)),
+        'Team': ['RR', 'DEC', 'DEC', 'MI', 'DC', 'CSK', 'CSK', 'CSK', 'SRH',
+                 'SRH', 'PBKS', 'CSK', 'DC', 'RCB', 'RR', 'GT', 'PBKS', 'GT'],
+        'wickets': [22, 23, 21, 28, 25, 32, 23, 26, 23, 26, 24, 26, 30,
+                    32, 27, 28, 24, 25]
+    })
+    csk_pc = pc[pc['Team'] == 'CSK']
+    plt.hist(csk_pc['wickets'], bins=5, color='yellow', edgecolor='black')
+    plt.title("CSK and wickets throughout years(purple cap)")
+    plt.xlabel("Wickets")
+    plt.ylabel("Frequency")
+    plt.show()
+
+
+def rcb():
+    import pandas as pd
+    import matplotlib.pyplot as plt
+
+    oc = pd.DataFrame({
+        'Year': list(range(2008, 2026)),
+        'Team': ['PBKS', 'CSK', 'MI', 'RCB', 'RCB', 'CSK', 'KKR', 'SRH', 'RCB',
+                 'SRH', 'SRH', 'SRH', 'PBKS', 'CSK', 'RR', 'GT', 'RCB', 'GT'],
+        'Runs': [616, 572, 618, 608, 733, 733, 660, 562, 973, 641, 735, 692,
+                 670, 635, 863, 890, 741, 759]
+    })
+
+    pc = pd.DataFrame({
+        'Year': list(range(2008, 2026)),
+        'Team': ['RR', 'DEC', 'DEC', 'MI', 'DC', 'CSK', 'CSK', 'CSK', 'SRH',
+                 'SRH', 'PBKS', 'CSK', 'DC', 'RCB', 'RR', 'GT', 'PBKS', 'GT'],
+        'wickets': [22, 23, 21, 28, 25, 32, 23, 26, 23, 26, 24, 26,
+                    30, 32, 27, 28, 24, 25]
+    })
+
+    rcb_oc = oc[oc['Team'] == 'RCB']
+    plt.hist(rcb_oc['Runs'], bins=5, color='red', edgecolor='black')
+    plt.title("RCB and runs throught out years(orange cap)")
+    plt.xlabel("Runs")
+    plt.ylabel("Frequency")
+    plt.show()
+
+    rcb_pc = pc[pc['Team'] == 'RCB']
+    plt.hist(rcb_pc['wickets'], bins=5, color='red', edgecolor='black')
+    plt.title("RCB and wickets throughout years(purple cap)")
+    plt.xlabel("Wickets")
+    plt.ylabel("Frequency")
+    plt.show()
+
+
+def pbks():
+    import pandas as pd
+    import matplotlib.pyplot as plt
+
+    oc = pd.DataFrame({
+        'Year': list(range(2008, 2026)),
+        'Team': ['PBKS', 'CSK', 'MI', 'RCB', 'RCB', 'CSK', 'KKR', 'SRH', 'RCB',
+                 'SRH', 'SRH', 'SRH', 'PBKS', 'CSK', 'RR', 'GT', 'RCB', 'GT'],
+        'Runs': [616, 572, 618, 608, 733, 733, 660, 562, 973, 641, 735, 692,
+                 670, 635, 863, 890, 741, 759]
+    })
+
+    pc = pd.DataFrame({
+        'Year': list(range(2008, 2026)),
+        'Team': ['RR', 'DEC', 'DEC', 'MI', 'DC', 'CSK', 'CSK', 'CSK', 'SRH',
+                 'SRH', 'PBKS', 'CSK', 'DC', 'RCB', 'RR', 'GT', 'PBKS', 'GT'],
+        'wickets': [22, 23, 21, 28, 25, 32, 23, 26, 23, 26, 24,
+                    26, 30, 32, 27, 28, 24, 25]
+    })
+
+    pbks_oc = oc[oc['Team'] == 'PBKS']
+    plt.hist(pbks_oc['Runs'], bins=5, color='firebrick', edgecolor='black')
+    plt.title("PBKS and runs throught out years(orange cap)")
+    plt.xlabel("Runs")
+    plt.ylabel("Frequency")
+    plt.show()
+
+    pbks_pc = pc[pc['Team'] == 'PBKS']
+    plt.hist(pbks_pc['wickets'], bins=5, color='firebrick', edgecolor='black')
+    plt.title("PBKS and wickets throughout years(purple cap)")
+    plt.xlabel("Wickets")
+    plt.ylabel("Frequency")
+    plt.show()
+
+
+def mi():
+    import pandas as pd
+    import matplotlib.pyplot as plt
+
+    oc = pd.DataFrame({
+        'Year': list(range(2008, 2026)),
+        'Team': ['PBKS', 'CSK', 'MI', 'RCB', 'RCB', 'CSK', 'KKR', 'SRH', 'RCB',
+                 'SRH', 'SRH', 'SRH', 'PBKS', 'CSK', 'RR', 'GT', 'RCB', 'GT'],
+        'Runs': [616, 572, 618, 608, 733, 733, 660, 562, 973, 641, 735, 692,
+                 670, 635, 863, 890, 741, 759]
+    })
+
+    pc = pd.DataFrame({
+        'Year': list(range(2008, 2026)),
+        'Team': ['RR', 'DEC', 'DEC', 'MI', 'DC', 'CSK', 'CSK', 'CSK', 'SRH',
+                 'SRH', 'PBKS', 'CSK', 'DC', 'RCB', 'RR', 'GT', 'PBKS', 'GT'],
+        'wickets': [22, 23, 21, 28, 25, 32, 23, 26, 23, 26,
+                    24, 26, 30, 32, 27, 28, 24, 25]
+    })
+
+    mi_oc = oc[oc['Team'] == 'MI']
+    plt.hist(mi_oc['Runs'], bins=5, color='blue', edgecolor='black')
+    plt.title("MI and runs throught out years(orange cap)")
+    plt.xlabel("Runs")
+    plt.ylabel("Frequency")
+    plt.show()
+
+    mi_pc = pc[pc['Team'] == 'MI']
+    plt.hist(mi_pc['wickets'], bins=5, color='blue', edgecolor='black')
+    plt.title("MI and wickets throughout years(purple cap)")
+    plt.xlabel("Wickets")
+    plt.ylabel("Frequency")
+    plt.show()
+
+
+def main():
+    while True:
+        print("\n🏏 Welcome to IPL Stats Place!")
+        choice = input(
+            "Choose an option:\n"
+            " 1. Orange Cap\n"
+            " 2. Purple Cap\n"
+            " 3. Comparison (Orange vs Purple)\n"
+            " 4. Centuries\n"
+            " 5. Hat-trick\n"
+            " 6. Runner-ups\n"
+            " 7. Winners\n"
+            " 8. Team Details\n"
+            " exit\n"
+            "Type: "
+        ).lower()
+
+        if choice == "1" or "orange cap" in choice:
+            orange_cap_info()
+
+        elif choice == "2" or "purple cap" in choice:
+            purple_cap_info()
+
+        elif choice == "3" or "comparison" in choice:
+            comparison()
+
+        elif choice == "4" or "centuries" in choice:
+            centuries()
+
+        elif choice == "5" or "hat-trick" in choice:
+            hat()
+
+        elif choice == "6" or "runner ups" in choice:
+            runner()
+
+        elif choice == "7" or "winners" in choice:
+            winner()
+
+        elif choice == "8" or "team details" in choice:
+            sub = input(
+                "\nPick a team:\n"
+                " 1. CSK\n"
+                " 2. RCB\n"
+                " 3. PBKS\n"
+                " 4. MI\n"
+                " back\n"
+                "Type: "
+            ).lower()
+
+            if sub == "1" or sub == "csk":
+                csk()
+            elif sub == "2" or sub == "rcb":
+                rcb()
+            elif sub == "3" or sub == "pbks":
+                pbks()
+            elif sub == "4" or sub == "mi":
+                mi()
+            elif sub == "back":
+                continue
+            else:
+                print("❌ Invalid team option.")
+
+        elif choice == "exit":
+            print("👋 Thanks for visiting IPL Stats Place!")
+            break
+
+        else:
+            print("❌ Invalid choice, try again.")
+
+
+main()

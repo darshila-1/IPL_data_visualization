@@ -65,22 +65,24 @@ CSK, RCB, PBKS, and MI histograms for Orange & Purple Cap years
 
 Make sure you have Python installed. Then install required libraries:
 
-'''pip install pandas matplotlib'''
+```pip install pandas matplotlib```
 
 
 Run the main program:
 
-'''python your_script_name.py'''
+```python your_script_name.py```
 
 
 You’ll get an interactive menu to choose different IPL stats and visualisations.
 
 📂 Project Structure
-'''IPL-Stats/
+```
+IPL-Stats/
 │
 ├── main_script.py     # Contains all functions and main menu
 ├── README.md          # Project documentation
-└── (Optional future additions...)'''
+└── (Optional future additions...)
+```
 
 📊 Graphs Used
 
